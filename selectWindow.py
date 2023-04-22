@@ -98,10 +98,11 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
 # df['6'].to_csv('psnr6.csv', index=False)
 # df['7_'].to_csv('psnr7_new.csv', index=False)
 
-t = [20, 20, 30, 40, 50]
-d = [20, 20, 30, 40, 50]
-b = 0.5
-L = 100
+if __name__ == "__main__":
+    t = [20, 20, 30, 40, 50]
+    d = [20, 20, 30, 40, 50]
+    b = 0.5
+    L = 100
 
-a = select(t, d, b, L, mode='all')
-print(a)
+    a = select(t, d, b, L, mode='all')
+    print(a)
