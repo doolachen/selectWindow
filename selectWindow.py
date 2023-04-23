@@ -5,6 +5,12 @@ import os
 
 root = os.path.dirname(__file__)
 
+def filter_func(df, mode):
+    filtered = []
+    for row in df:
+        if mode in row[0]:
+            filtered.append(row)
+    return np.array(filtered)
 
 def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
     """
@@ -28,9 +34,13 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         }
     else:
         # TODO
-        df = {'3': pd.read_csv('./psnr3.csv').to_numpy(), '4': pd.read_csv('./psnr4.csv').to_numpy(),
-              '5': pd.read_csv('./psnr5.csv').to_numpy(), '6': pd.read_csv('./psnr6.csv').to_numpy(),
-              '7': pd.read_csv('./psnr7.csv').to_numpy()}
+        df = {
+            '3': filter_func(pd.read_csv(os.path.join(root, 'psnr3.csv')).to_numpy(), mode),
+            '4': filter_func(pd.read_csv(os.path.join(root, 'psnr4.csv')).to_numpy(), mode),
+            '5': filter_func(pd.read_csv(os.path.join(root, 'psnr5.csv')).to_numpy(), mode),
+            '6': filter_func(pd.read_csv(os.path.join(root, 'psnr6.csv')).to_numpy(), mode),
+            '7': filter_func(pd.read_csv(os.path.join(root, 'psnr7.csv')).to_numpy(), mode)
+        }
 
     total = np.sum([time, [_ / bandwidth for _ in data]], axis=0)
     windows = []
@@ -54,7 +64,7 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         for item in out:
             compare.append((item, out[item][i]))
         res = sorted(compare, reverse=True, key=lambda x: x[1])
-        final_out.append(res[0])
+        final_out.append((int(res[0][0]), res[0][1]))
 
     return final_out
 
