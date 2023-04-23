@@ -58,15 +58,20 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
             avg.append(np.mean(line[2:2 + temp[1]]))
         out[temp[0]] = avg
         length = len(avg)
-    final_out = []
+    best_quality_out = []
+    max_window_out = []
+    min_window_out = []
     for i in range(length):
         compare = []
         for item in out:
             compare.append((item, out[item][i]))
         res = sorted(compare, reverse=True, key=lambda x: x[1])
-        final_out.append((int(res[0][0]), res[0][1]))
+        best_quality_out.append((int(res[0][0]), res[0][1]))
+        res = sorted(compare, reverse=True, key=lambda x: x[0])
+        max_window_out.append((int(res[0][0]), res[0][1]))
+        min_window_out.append((int(res[-1][0]), res[-1][1]))
 
-    return final_out
+    return best_quality_out, max_window_out, min_window_out
 
 
 if __name__ == "__main__":
