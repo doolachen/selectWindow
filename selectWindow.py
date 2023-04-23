@@ -71,7 +71,7 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         max_window_out.append((int(res[0][0]), res[0][1]))
         min_window_out.append((int(res[-1][0]), res[-1][1]))
 
-    return best_quality_out, max_window_out, min_window_out
+    return best_quality_out, max_window_out, min_window_out, [(int(n_frame[0]), n_frame[1]) for n_frame in n_frames]
 
 
 if __name__ == "__main__":
