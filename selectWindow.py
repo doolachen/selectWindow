@@ -1,6 +1,9 @@
 import math
 import numpy as np
 import pandas as pd
+import os
+
+root = os.path.dirname(__file__)
 
 
 def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
@@ -16,9 +19,13 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         list[tuple(str: windows_size,float: best_psnr)]
     """
     if mode == "all":
-        df = {'3': pd.read_csv('./psnr3.csv').to_numpy(), '4': pd.read_csv('./psnr4.csv').to_numpy(),
-              '5': pd.read_csv('./psnr5.csv').to_numpy(), '6': pd.read_csv('./psnr6.csv').to_numpy(),
-              '7': pd.read_csv('./psnr7.csv').to_numpy()}
+        df = {
+            '3': pd.read_csv(os.path.join(root, 'psnr3.csv')).to_numpy(),
+            '4': pd.read_csv(os.path.join(root, 'psnr4.csv')).to_numpy(),
+            '5': pd.read_csv(os.path.join(root, 'psnr5.csv')).to_numpy(),
+            '6': pd.read_csv(os.path.join(root, 'psnr6.csv')).to_numpy(),
+            '7': pd.read_csv(os.path.join(root, 'psnr7.csv')).to_numpy()
+        }
     else:
         # TODO
         df = {'3': pd.read_csv('./psnr3.csv').to_numpy(), '4': pd.read_csv('./psnr4.csv').to_numpy(),
@@ -50,7 +57,6 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         final_out.append(res[0])
 
     return final_out
-
 
 
 if __name__ == "__main__":
