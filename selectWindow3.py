@@ -71,7 +71,7 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         res = sorted(compare, reverse=True, key=lambda x: x[0])
         compares.append(res)
 
-    return compares, names, starts
+    return compares, names, starts, total, windows
 
 
 if __name__ == "__main__":
