@@ -71,7 +71,7 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         res = sorted(compare, reverse=True, key=lambda x: x[0])
         compares.append(res)
 
-    return compares, names, starts, total, windows
+    return compares, names, starts, total, windows, [(int(n_frame[0]), n_frame[1]) for n_frame in n_frames]
 
 
 if __name__ == "__main__":
