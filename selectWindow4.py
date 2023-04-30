@@ -60,7 +60,7 @@ def select(time: list, data: list, bandwidth: float, limit: float, mode: str):
         name = []
         for line in df[temp[0]]:
             avg.append(np.mean(line[2:2 + temp[1]]))
-            full.append(line[2:2 + temp[1]].astype(np.float))
+            full.append(line[2:2 + temp[1]].astype(float))
             name.append(line[0:2])
         out[temp[0]] = avg
         out_full[temp[0]] = full
